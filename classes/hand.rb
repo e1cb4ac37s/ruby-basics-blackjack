@@ -10,7 +10,9 @@ class Hand
   end
 
   def value
-    @cards.map(&:value).sum
+    aces, value = 0, 0
+    @cards.map(&:value).each { |v| v == 1 ? aces += 1 : value += v }
+    aces * 11 + value <= 21 ? aces * 11 + value : aces + value
   end
 
   def clear

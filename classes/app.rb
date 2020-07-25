@@ -34,7 +34,7 @@ class App
       case action
       when '1' then draw
       when '2' then end_round
-      else; end
+      end
       break if @round_state[:ended]
       dealer_action
     end
