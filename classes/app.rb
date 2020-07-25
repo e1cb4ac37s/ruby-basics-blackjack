@@ -17,13 +17,15 @@ class App
   def game_loop
     loop do
       round
-      if @player.balance > 0 && @dealer.balance > 0
-        print '-> Play again? (y/n): '
-        break if gets.chomp !~ /y/i
+      if @player.balance.positive? && @dealer.balance.positive?
+        print '-> Play again? (y): '
+        next if gets.chomp =~ /y/i
+      elsif @player.balance.zero?
+        puts "You've lost all your money. Come back later, looser!"
       else
-        puts @player.balance == 0 ? "You've lost all your money. Come back later, looser!" : 'Dealer is outta money, game is over, cowboy!'
-        break
+        puts 'Dealer is outta money, game is over, cowboy!'
       end
+      break
     end
   end
 
@@ -78,18 +80,16 @@ class App
     puts @player
   end
 
+  # rubocop:disable Metrics/AbcSize
   def end_round
     @round_state[:ended] = true
     return if @dealer.hand.value == @player.hand.value
     return @round_state[:looser] = @player if @player.hand.value > 21
     return @round_state[:looser] = @dealer if @dealer.hand.value > 21
 
-    @round_state[:looser] = if 21 - @player.hand.value > 21 - @dealer.hand.value
-                              @player
-                            else
-                              @dealer
-                            end
+    @round_state[:looser] = 21 - @player.hand.value > 21 - @dealer.hand.value ? @player : @dealer
   end
+  # rubocop:enable Metrics/AbcSize
 
   def close_board
     if @round_state[:looser].nil?
