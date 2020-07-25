@@ -17,8 +17,13 @@ class App
   def game_loop
     loop do
       round
-      print '-> Play again? (y/n): '
-      break if gets.chomp !~ /y/i
+      if @player.balance > 0 && @dealer.balance > 0
+        print '-> Play again? (y/n): '
+        break if gets.chomp !~ /y/i
+      else
+        puts @player.balance == 0 ? "You've lost all your money. Come back later, looser!" : 'Dealer is outta money, game is over, cowboy!'
+        break
+      end
     end
   end
 
