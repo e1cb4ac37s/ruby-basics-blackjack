@@ -22,6 +22,10 @@ class Hand
     @cards = []
   end
 
+  def size
+    @cards.size
+  end
+
   def to_s
     "#{@cards.map(&:to_s).join(' ')} (#{value})"
   end

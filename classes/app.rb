@@ -30,6 +30,8 @@ class App
   def round
     init_board
     round_loop
+    close_board
+    @dealer.show
     print_board
   end
 
@@ -57,6 +59,7 @@ class App
       p.balance -= 10
       2.times { p.hand.draw(@deck.deal_card) }
     end
+    end_round if @player.hand.value == 21
   end
 
   def draw
@@ -67,23 +70,10 @@ class App
   def dealer_action
     value = @dealer.hand.value
     @dealer.hand.draw(@deck.deal_card) if value < 17
-    end_round if @dealer.hand.value >= 21
+    end_round if @dealer.hand.value >= 21 || @player.hand.size == 3
   end
 
   def print_board
-    if @round_state[:ended]
-      @dealer.show
-      if @round_state[:looser].nil?
-        puts "--- It's a draw! ---"
-        [@dealer, @player].each { |p| p.balance += 10 }
-      elsif @round_state[:looser] == @player
-        puts '--- You lose! ---'
-        @dealer.balance += 20
-      else
-        puts '--- You win! ---'
-        @player.balance += 20
-      end
-    end
     puts @dealer
     puts @player
   end
@@ -99,5 +89,18 @@ class App
                             else
                               @dealer
                             end
+  end
+
+  def close_board
+    if @round_state[:looser].nil?
+      puts "--- It's a draw! ---"
+      [@dealer, @player].each { |p| p.balance += 10 }
+    elsif @round_state[:looser] == @player
+      puts '--- You lose! ---'
+      @dealer.balance += 20
+    else
+      puts '--- You win! ---'
+      @player.balance += 20
+    end
   end
 end
