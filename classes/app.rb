@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class App
   def start
     print '-> Enter your name: '
@@ -27,7 +29,7 @@ class App
   end
 
   def round_loop
-    while !@round_state[:ended]
+    until @round_state[:ended]
       print_board
       print '-> Your turn, your action! (1) - draw, (2) - show cards, (w/e) - skip: '
       action = gets.chomp
@@ -36,6 +38,7 @@ class App
       when '2' then end_round
       end
       break if @round_state[:ended]
+
       dealer_action
     end
   end
@@ -86,10 +89,10 @@ class App
     return @round_state[:looser] = @player if @player.hand.value > 21
     return @round_state[:looser] = @dealer if @dealer.hand.value > 21
 
-    if 21 - @player.hand.value > 21 - @dealer.hand.value
-      @round_state[:looser] = @player
-    else
-      @round_state[:looser] = @dealer
-    end
+    @round_state[:looser] = if 21 - @player.hand.value > 21 - @dealer.hand.value
+                              @player
+                            else
+                              @dealer
+                            end
   end
 end

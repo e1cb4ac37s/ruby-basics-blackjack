@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hand
   attr_reader :cards
 
@@ -10,7 +12,8 @@ class Hand
   end
 
   def value
-    aces, value = 0, 0
+    aces = 0
+    value = 0
     @cards.map(&:value).each { |v| v == 1 ? aces += 1 : value += v }
     aces * 11 + value <= 21 ? aces * 11 + value : aces + value
   end

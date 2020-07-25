@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Dealer < Player
   def initialize
     super('Dealer')
@@ -19,6 +21,6 @@ class Dealer < Player
   def to_s
     return super if @show_cards
 
-    "#{@name} | hand: #{@hand.cards.map {'[??]'}.join(' ')} | balance: $#{@balance}"
+    "#{@name} | hand: #{@hand.cards.map { '[??]' }.join(' ')} | balance: $#{@balance}"
   end
 end

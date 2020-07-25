@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Card
   include Constants
 
@@ -8,6 +10,7 @@ class Card
 
   def value
     return 10 if TEN_COSTS.include?(@rank)
+
     INDEX_COSTS.index(@rank) + 1
   end
 

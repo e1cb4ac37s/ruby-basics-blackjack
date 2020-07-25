@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'modules/constants'
 require_relative 'classes/card'
 require_relative 'classes/deck'
