@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'modules/constants'
-require_relative 'modules/colors'
-require_relative 'classes/card'
-require_relative 'classes/deck'
-require_relative 'classes/hand'
-require_relative 'classes/player'
-require_relative 'classes/dealer'
-require_relative 'classes/game'
-require_relative 'classes/interface'
+require_relative 'game/modules/constants'
+require_relative 'game/components/card'
+require_relative 'game/components/deck'
+require_relative 'game/components/hand'
+require_relative 'game/components/player'
+require_relative 'game/components/dealer'
+require_relative 'game/game'
+
+require_relative 'client/colors'
+require_relative 'client/interface'
