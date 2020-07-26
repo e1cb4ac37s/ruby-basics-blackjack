@@ -14,8 +14,9 @@ class Hand
   def value
     aces = 0
     value = 0
-    @cards.map(&:value).each { |v| v == 1 ? aces += 1 : value += v }
-    aces * 11 + value <= 21 ? aces * 11 + value : aces + value
+    @cards.map(&:value).each { |v| v == 11 ? aces += 1 : value += v }
+    aces.times { value += 11 + value > 21 ? 1 : 11 }
+    value
   end
 
   def clear

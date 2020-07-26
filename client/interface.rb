@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Interface
   include Colorize
 
@@ -27,13 +29,14 @@ class Interface
   def menu
     until @game.round_ended?
       print_board
-      print Color::brown('-> Your action => (1) - draw, (2) - show cards, (w/e) - skip: ')
+      print Color.brown('-> Your action => (1) - draw, (2) - show cards, (w/e) - skip: ')
       action = gets.chomp
       case action
       when '1' then draw
       when '2' then finish_round
       end
       break if @game.round_ended?
+
       dealer_turn
     end
   end
@@ -58,11 +61,11 @@ class Interface
   def close_round
     print_board
     if @game.round_winner.nil?
-      puts Color::brown("--- It's a draw! ---")
+      puts Color.brown("--- It's a draw! ---")
     elsif @game.round_winner == 'player'
-      puts Color::green('--- You win! ---')
+      puts Color.green('--- You win! ---')
     else
-      puts Color::red('--- You lose! ---')
+      puts Color.red('--- You lose! ---')
     end
   end
 end

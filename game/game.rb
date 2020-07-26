@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game
   def initialize(player_name)
     @status = { playing: false, winner: nil }

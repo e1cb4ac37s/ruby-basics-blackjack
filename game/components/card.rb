@@ -9,12 +9,17 @@ class Card
   end
 
   def value
-    return 10 if TEN_COSTS.include?(@rank)
+    return 11 if ace?
+    return 10 if JQK.include?(@rank)
 
-    INDEX_COSTS.index(@rank) + 1
+    @rank.to_i
   end
 
   def to_s
     "[#{@rank}#{@suit}]"
+  end
+
+  def ace?
+    @rank == ACE
   end
 end
