@@ -2,5 +2,9 @@
 
 require_relative 'requires'
 
-app = App.new
+print '-> Enter your name: '
+name = gets.chomp
+
+game = Game.new(name)
+app = Interface.new(game)
 app.start

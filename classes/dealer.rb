@@ -5,7 +5,7 @@ class Dealer < Player
     super('Dealer')
   end
 
-  def refresh
+  def refresh_hand
     super
     hide
   end

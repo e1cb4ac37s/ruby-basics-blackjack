@@ -7,10 +7,10 @@ class Player
   def initialize(name)
     @name = name
     @balance = 100
-    refresh
+    refresh_hand
   end
 
-  def refresh
+  def refresh_hand
     @hand = Hand.new
   end
 
